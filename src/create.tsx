@@ -28,7 +28,7 @@ export default function Command() {
       "string title,string description,address recipient,uint256 duration,uint256 price"
     );
 
-    const expirationTime = values.duration.getTime();
+    const expirationTime = Math.floor(values.duration.getTime() / 1000); // Convert to UNIX timestamp
     const encodedData = schemaEncoder.encodeData([
       { name: "title", value: values.title, type: "string" },
       { name: "description", value: values.description, type: "string" },
@@ -77,7 +77,7 @@ export default function Command() {
       <Form.TextArea id="description" title="Description" defaultValue="The plan include access to gated group..." />
       <Form.TextField id="recipient" title="Recipient" defaultValue="0xFD50b031E778fAb33DfD2Fc3Ca66a1EeF0652165" />
       <Form.Separator />
-      <Form.DatePicker id="duration" title="Duration" defaultValue={new Date(Date.now())} />
+      <Form.DatePicker id="duration" title="Duration" defaultValue={new Date(Date.now() + 86400_000)} />
       <Form.TextField id="price" title="Price in USD" defaultValue="20" />
     </Form>
   );
