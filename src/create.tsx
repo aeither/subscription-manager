@@ -25,7 +25,7 @@ export default function Command() {
 
     // Initialize SchemaEncoder with the schema string
     const schemaEncoder = new SchemaEncoder(
-      "string title, string description, address recipient, uint256 duration, uint256 price"
+      "string title,string description,address recipient,uint256 duration,uint256 price"
     );
 
     const expirationTime = values.duration.getTime();
@@ -34,9 +34,8 @@ export default function Command() {
       { name: "description", value: values.description, type: "string" },
       { name: "recipient", value: values.recipient, type: "address" },
       { name: "duration", value: expirationTime, type: "uint256" },
-      { name: "price", value: values.price, type: "uint256" },
+      { name: "price", value: Number(values.price), type: "uint256" },
     ]);
-
 
     const toast = await showToast({ style: Toast.Style.Animated, title: "Minting..." });
     try {
@@ -58,7 +57,7 @@ export default function Command() {
       await Clipboard.copy(`https://base-goerli.easscan.org/attestation/view/${newAttestationUID}`);
     } catch (err: any) {
       toast.style = Toast.Style.Failure;
-      toast.title = "Failed to upload image";
+      toast.title = "Failed";
       toast.message = err.message;
     }
 
