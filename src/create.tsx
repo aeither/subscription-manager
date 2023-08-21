@@ -15,9 +15,8 @@ type Values = {
 };
 
 export default function Command() {
-  
   async function handleSubmit(values: Values) {
-    console.log("🚀 ~ file: create.tsx:20 ~ handleSubmit ~ values:", values)
+    console.log("🚀 ~ file: create.tsx:20 ~ handleSubmit ~ values:", values);
     console.log("button submitting...");
 
     // const signer = getSigner();
@@ -60,6 +59,10 @@ export default function Command() {
       }
     >
       <Form.Description text="This form showcases all available form elements." />
+      <Form.TextField id="title" title="Title" defaultValue="Basic Plan" />
+      <Form.TextArea id="description" title="Description" defaultValue="The plan include access to gated group..." />
+      <Form.Separator />
+      <Form.TextField id="duration" title="Duration" defaultValue="30 Days" />
     </Form>
   );
 }
