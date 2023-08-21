@@ -21,9 +21,8 @@
   "commands": [
     {
       "name": "create",
-      "title": "Submit Form",
-      "subtitle": "Submit Form to attest",
-      "description": "Template for submitting a form",
+      "title": "Create Subscription",
+      "description": "Create Subscription",
       "mode": "view"
     },
     {
