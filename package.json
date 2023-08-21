@@ -1,0 +1,64 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "attest-manager",
+  "title": "Attest Manager",
+  "description": "Easily attest from Spotlight",
+  "icon": "command-icon.png",
+  "author": "lin",
+  "categories": [
+    "Applications"
+  ],
+  "license": "MIT",
+  "preferences": [
+    {
+      "name": "apiKey",
+      "type": "textfield",
+      "title": "API Key",
+      "description": "Your API key for the service",
+      "required": true
+    }
+  ],
+  "commands": [
+    {
+      "name": "create",
+      "title": "Submit Form",
+      "subtitle": "Submit Form to attest",
+      "description": "Template for submitting a form",
+      "mode": "view"
+    },
+    {
+      "name": "list",
+      "title": "List of attestations",
+      "subtitle": "List of attestations",
+      "description": "List of attestations",
+      "mode": "view"
+    },
+    {
+      "name": "preferences",
+      "title": "preferences",
+      "subtitle": "preferences",
+      "description": "preferences",
+      "mode": "view"
+    }
+  ],
+  "dependencies": {
+    "@ethereum-attestation-service/eas-sdk": "^1.1.0-beta.2",
+    "@raycast/api": "^1.56.0",
+    "ethers": "^5.7.2"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "1.0.5",
+    "@types/node": "18.8.3",
+    "@types/react": "18.0.9",
+    "eslint": "^7.32.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.4.3"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}
