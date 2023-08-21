@@ -1,6 +1,6 @@
 import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 import { SignerOrProvider } from "@ethereum-attestation-service/eas-sdk/dist/transaction";
-import { Action, ActionPanel, Form, Toast, showToast } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, Form, Toast, showToast } from "@raycast/api";
 import { getSigner } from "./utils/signer";
 
 export const EASContractAddress = "0xC2679fBD37d54388Ce493F1DB75320D236e1815e"; // Sepolia v0.26
@@ -57,6 +57,7 @@ export default function Command() {
       console.log("New attestation UID:", newAttestationUID);
       toast.style = Toast.Style.Success;
       toast.title = "New attestation UID:" + newAttestationUID;
+      await Clipboard.copy(`https://sepolia.easscan.org/attestation/view/${newAttestationUID}`);
     } catch (err: any) {
       toast.style = Toast.Style.Failure;
       toast.title = "Failed to upload image";
