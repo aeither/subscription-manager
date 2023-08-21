@@ -2,8 +2,7 @@ import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 import { SignerOrProvider } from "@ethereum-attestation-service/eas-sdk/dist/transaction";
 import { Action, ActionPanel, Clipboard, Form, Toast, showToast } from "@raycast/api";
 import { getSigner } from "./utils/signer";
-
-export const EASContractAddress = "0xC2679fBD37d54388Ce493F1DB75320D236e1815e"; // Sepolia v0.26
+import { EASContractAddress, schemaUID } from "./utils/constants";
 
 type Values = {
   title: string;
@@ -38,7 +37,6 @@ export default function Command() {
       { name: "price", value: values.price, type: "uint256" },
     ]);
 
-    const schemaUID = "0xb16fa048b0d597f5a821747eba64efa4762ee5143e9a80600d0005386edfc995";
 
     const toast = await showToast({ style: Toast.Style.Animated, title: "Minting..." });
     try {
@@ -57,7 +55,7 @@ export default function Command() {
       console.log("New attestation UID:", newAttestationUID);
       toast.style = Toast.Style.Success;
       toast.title = "New attestation UID:" + newAttestationUID;
-      await Clipboard.copy(`https://sepolia.easscan.org/attestation/view/${newAttestationUID}`);
+      await Clipboard.copy(`https://base-goerli.easscan.org/attestation/view/${newAttestationUID}`);
     } catch (err: any) {
       toast.style = Toast.Style.Failure;
       toast.title = "Failed to upload image";
