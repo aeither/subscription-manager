@@ -33,6 +33,13 @@
       "mode": "view"
     },
     {
+      "name": "registry",
+      "title": "registry",
+      "subtitle": "registry",
+      "description": "registry registry",
+      "mode": "view"
+    },
+    {
       "name": "preferences",
       "title": "preferences",
       "subtitle": "preferences",
@@ -43,6 +50,7 @@
   "dependencies": {
     "@ethereum-attestation-service/eas-sdk": "^1.1.0-beta.2",
     "@raycast/api": "^1.56.0",
+    "@raycast/utils": "^1.9.1",
     "ethers": "^5.7.2"
   },
   "devDependencies": {
