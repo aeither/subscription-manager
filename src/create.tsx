@@ -14,8 +14,7 @@ type Values = {
 
 export default function Command() {
   async function handleSubmit(values: Values) {
-    console.log("🚀 ~ file: create.tsx:20 ~ handleSubmit ~ values:", values);
-    console.log("button submitting...");
+    console.log("Submitting...");
 
     const signer = getSigner();
     console.log("signer address", signer.address);
