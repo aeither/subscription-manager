@@ -27,31 +27,30 @@
     },
     {
       "name": "list",
-      "title": "List of attestations",
-      "subtitle": "List of attestations",
+      "title": "Show attestations",
       "description": "List of attestations",
       "mode": "view"
     },
     {
       "name": "registry",
-      "title": "registry",
-      "subtitle": "registry",
-      "description": "registry registry",
+      "title": "Registry",
+      "description": "Show registry",
       "mode": "view"
     },
     {
       "name": "preferences",
-      "title": "preferences",
-      "subtitle": "preferences",
-      "description": "preferences",
+      "title": "Preferences",
+      "description": "Show preferences",
       "mode": "view"
     }
   ],
   "dependencies": {
+    "@apollo/client": "^3.8.1",
     "@ethereum-attestation-service/eas-sdk": "^1.1.0-beta.2",
     "@raycast/api": "^1.56.0",
     "@raycast/utils": "^1.9.1",
-    "ethers": "^5.7.2"
+    "ethers": "^5.7.2",
+    "graphql": "^16.8.0"
   },
   "devDependencies": {
     "@raycast/eslint-config": "1.0.5",
