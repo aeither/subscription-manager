@@ -3,7 +3,7 @@ import { SignerOrProvider } from "@ethereum-attestation-service/eas-sdk/dist/tra
 import { Detail } from "@raycast/api";
 import { usePromise } from "@raycast/utils";
 import { ethers } from "ethers";
-import { EASContractAddress, schemaUID } from "./utils/constants";
+import { EASContractAddress, SubscriptionAddress, schemaUID } from "./utils/constants";
 import { getSigner } from "./utils/signer";
 
 export default function Command() {
@@ -45,6 +45,11 @@ export default function Command() {
           <Detail.Metadata.Link
             title="EASScan"
             target={`https://base-goerli.easscan.org/schema/view/${data?.schemaRecord.uid}`}
+            text="Open"
+          />
+          <Detail.Metadata.Link
+            title="Base Goerli Subscription Contract"
+            target={`https://goerli.basescan.org/address/${SubscriptionAddress}`}
             text="Open"
           />
         </Detail.Metadata>
