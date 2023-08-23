@@ -1,4 +1,4 @@
-![Raycast 2023-08-23 at 16 04 44](https://github.com/aeither/subscription-manager/assets/36173828/34ada430-b259-40f8-9a82-007b1d89746c)
+
 <img src="https://github.com/aeither/subscription-manager/assets/36173828/ae67987b-8e5d-4e81-93dc-632aefccb81d" alt="Logo" width="100%" >
 
 # Subscription Manager
@@ -47,4 +47,20 @@ EAS Schema:
 https://base-goerli.easscan.org/schema/view/0x83422a9c21920ff23e2ca62c3fbd52536c7d90798a6ea0e6926dcc82afc06050
 
 ## Screenshots
+
+Menu
+
+![menu](https://github.com/aeither/subscription-manager/assets/36173828/34ada430-b259-40f8-9a82-007b1d89746c)
+
+Custom subscription
+
+![custom](https://github.com/aeither/subscription-manager/assets/36173828/9938446f-b61a-4b48-a358-7784b393b3f7)
+
+Subscribe
+
+![subscribe](https://github.com/aeither/subscription-manager/assets/36173828/5b3eb253-75f2-45da-850c-6a460325df2d)
+
+All subscriptions
+
+![all](https://github.com/aeither/subscription-manager/assets/36173828/2e8b8fc9-af11-4d1f-8df9-34079a16a1f5)
 
