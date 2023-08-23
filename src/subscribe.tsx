@@ -1,6 +1,6 @@
 import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 import { SignerOrProvider } from "@ethereum-attestation-service/eas-sdk/dist/transaction";
-import { Action, ActionPanel, Grid, Toast, getPreferenceValues, showToast } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, Form, Grid, Toast, getPreferenceValues, showToast } from "@raycast/api";
 import "cross-fetch/polyfill";
 import { createWalletClient, http, parseEther, publicActions } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
@@ -9,7 +9,7 @@ import { EASContractAddress, SubscriptionAddress, schemaUID } from "./utils/cons
 import { getSigner } from "./utils/signer";
 import { subscriptionAbi } from "./utils/subscriptionAbi";
 
-async function easMint(recipient: string, price: string) {
+async function easMint(recipient: string, price: bigint) {
   const signer = getSigner();
   const eas = new EAS(EASContractAddress);
   eas.connect(signer as unknown as SignerOrProvider);
@@ -25,7 +25,7 @@ async function easMint(recipient: string, price: string) {
     { name: "description", value: "Access to basic benefits", type: "string" },
     { name: "recipient", value: recipient, type: "address" },
     { name: "duration", value: expirationTime, type: "uint256" },
-    { name: "price", value: Number(price), type: "uint256" },
+    { name: "price", value: price, type: "uint256" },
   ]);
 
   try {
@@ -63,7 +63,7 @@ export default function Command() {
     }).extend(publicActions);
 
     // Pay ETH for subscription
-    const { request } = await client.simulateContract({
+     const { request } = await client.simulateContract({
       address: SubscriptionAddress,
       abi: subscriptionAbi,
       functionName: "subscribe",
@@ -71,18 +71,19 @@ export default function Command() {
     });
     const hash = await client.writeContract(request);
     console.log("🚀 ~ file: subscribe.tsx:78 ~ handleSubmit ~ hash:", hash);
+    toast.title = `Hash: ${hash}`
 
     // Mint eas attestation
-    // const easMintResponse: { msg: string; status: number } = await easMint(client.account.address, "0.0001");
-    // if (easMintResponse.status) {
-    //   toast.style = Toast.Style.Success;
-    //   toast.title = "New attestation UID:" + easMintResponse.msg;
-    //   await Clipboard.copy(`https://base-goerli.easscan.org/attestation/view/${easMintResponse.msg}`);
-    // } else {
-    //   toast.style = Toast.Style.Failure;
-    //   toast.title = "Failed";
-    //   toast.message = easMintResponse.msg;
-    // }
+    const easMintResponse: { msg: string; status: number } = await easMint(client.account.address, parseEther("0.0001"));
+    if (easMintResponse.status) {
+      toast.style = Toast.Style.Success;
+      toast.title = "New attestation UID:" + easMintResponse.msg;
+      await Clipboard.copy(`https://base-goerli.easscan.org/attestation/view/${easMintResponse.msg}`);
+    } else {
+      toast.style = Toast.Style.Failure;
+      toast.title = "Failed";
+      toast.message = easMintResponse.msg;
+    }
 
     // const accountBalance = await client.getBalance({ address: account.address });
     // const balanceAsEther = formatEther(accountBalance);
