@@ -1,12 +1,10 @@
-import { Detail } from "@raycast/api";
 import { EAS, SchemaRegistry } from "@ethereum-attestation-service/eas-sdk";
 import { SignerOrProvider } from "@ethereum-attestation-service/eas-sdk/dist/transaction";
-import { List } from "@raycast/api";
+import { Detail } from "@raycast/api";
 import { usePromise } from "@raycast/utils";
+import { ethers } from "ethers";
 import { EASContractAddress, schemaUID } from "./utils/constants";
 import { getSigner } from "./utils/signer";
-import { ethers } from "ethers";
-import { secureHeapUsed } from "crypto";
 
 export default function Command() {
   const { isLoading, data, revalidate } = usePromise(async () => {
@@ -22,9 +20,38 @@ export default function Command() {
     const schemaRecord = await schemaRegistry.getSchema({ uid: schemaUID });
 
     console.log(schemaRecord);
-    const markdownString = "UID: " + schemaRecord.uid + "\n Schema: " + schemaRecord.schema;
-    return markdownString;
+    const markdownString = `
+    # UID: ${schemaRecord.uid}
+    
+    Schema: ${schemaRecord.schema}
+    `;
+
+    return { description: markdownString, schemaRecord };
   }, []);
 
-  return <Detail isLoading={isLoading} markdown={data || "Not found"} />;
+  return (
+    <Detail
+      isLoading={isLoading}
+      markdown={data?.description}
+      navigationTitle="Registry"
+      metadata={
+        <Detail.Metadata>
+          <Detail.Metadata.Label title="Resolver" text={data?.schemaRecord.resolver} />
+          <Detail.Metadata.Label title="Schema" text={data?.schemaRecord.schema} />
+          <Detail.Metadata.TagList title="Revocable">
+            <Detail.Metadata.TagList.Item text={data?.schemaRecord.revocable ? "True" : "False"} color={"#eed535"} />
+          </Detail.Metadata.TagList>
+          <Detail.Metadata.Separator />
+          <Detail.Metadata.Link
+            title="EASScan"
+            target={`https://base-goerli.easscan.org/schema/view/${data?.schemaRecord.uid}`}
+            text="Open"
+          />
+        </Detail.Metadata>
+      }
+    />
+  );
+  {
+    /* <Detail isLoading={isLoading} markdown={data || "Loading..."} /> */
+  }
 }

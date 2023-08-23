@@ -1,7 +1,7 @@
 import { ActionPanel, Action, Detail, openExtensionPreferences } from "@raycast/api";
 
 export default function Command() {
-  const markdown = "API key incorrect. Please update it in extension preferences and try again.";
+  const markdown = "Update it in extension preferences.";
 
   return (
     <Detail
