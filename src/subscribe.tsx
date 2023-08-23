@@ -1,6 +1,6 @@
 import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 import { SignerOrProvider } from "@ethereum-attestation-service/eas-sdk/dist/transaction";
-import { Action, ActionPanel, Clipboard, Form, Grid, Toast, getPreferenceValues, showToast } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, Grid, Toast, getPreferenceValues, showToast } from "@raycast/api";
 import "cross-fetch/polyfill";
 import { createWalletClient, http, parseEther, publicActions } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
@@ -70,14 +70,17 @@ export default function Command() {
       value: parseEther("0.0001"),
     });
     const hash = await client.writeContract(request);
-    console.log("🚀 ~ file: subscribe.tsx:78 ~ handleSubmit ~ hash:", hash);
+    console.log(`https://goerli.basescan.org/tx/${hash}`);
     toast.title = `Hash: ${hash}`
+    const transaction = await client.waitForTransactionReceipt( 
+      { hash: hash }
+    )
 
     // Mint eas attestation
     const easMintResponse: { msg: string; status: number } = await easMint(client.account.address, parseEther("0.0001"));
     if (easMintResponse.status) {
       toast.style = Toast.Style.Success;
-      toast.title = "New attestation UID:" + easMintResponse.msg;
+      toast.title = "New attestation UID:" + `https://base-goerli.easscan.org/attestation/view/${easMintResponse.msg}`;
       await Clipboard.copy(`https://base-goerli.easscan.org/attestation/view/${easMintResponse.msg}`);
     } else {
       toast.style = Toast.Style.Failure;
@@ -122,16 +125,5 @@ export default function Command() {
         }
       />
     </Grid>
-
-    // <Form
-    //   actions={
-    //     <ActionPanel>
-    //       <Action.SubmitForm onSubmit={handleSubmit} />
-    //     </ActionPanel>
-    //   }
-    // >
-    //   <Form.Description text="Subscribe for 30 days to basic Plan" />
-    //   <Form.TextField id="price" title="Price in ETH" defaultValue="20" />
-    // </Form>
   );
 }
