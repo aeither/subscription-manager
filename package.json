@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "attest-manager",
-  "title": "Attest Manager",
+  "name": "subscription-manager",
+  "title": "Subscription Manager",
   "description": "Easily attest from Spotlight",
   "icon": "command-icon.png",
   "author": "lin",
@@ -27,8 +27,8 @@
     },
     {
       "name": "list",
-      "title": "Show attestations",
-      "description": "List of attestations",
+      "title": "Show subscriptions",
+      "description": "List of subscriptions",
       "mode": "view"
     },
     {

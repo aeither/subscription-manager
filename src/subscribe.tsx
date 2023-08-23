@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Detail, getPreferenceValues } from "@raycast/api";
 import "cross-fetch/polyfill";
-import { formatEther, http, parseAbi } from "viem";
-import { mainnet, baseGoerli } from "viem/chains";
+import { formatEther, http } from "viem";
+import { baseGoerli } from "viem/chains";
 
 import { createWalletClient, publicActions } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
